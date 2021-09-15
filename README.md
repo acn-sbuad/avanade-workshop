@@ -275,9 +275,9 @@ The template function only accesses the first element in the input collection. I
 
 1. Ensure that all changes to the ratings results in a log line in the console. 
   
-  _Hint_: Try looping through the input collection with a _ForEach_ loop.
+    _Hint_: Try looping through the input collection with a _ForEach_ loop.
 
-  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/logAllChanges)    
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/logAllChanges)    
 
 
 2. Print the content of the rating in the console. 
@@ -290,7 +290,7 @@ The template function only accesses the first element in the input collection. I
 
     _Hint_: Use System.Text.Json.JsonSerializer to serialize the rating object to a json string.
 
-  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printContent)    
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printContent)    
     
 
 3. Print a different string to the console depending of the score of the rating. 
