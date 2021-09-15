@@ -42,21 +42,27 @@ You will now be prompted for configurations for the project. Input the following
 - **Folder that will contain your project**: The folder you newly created.
 
 - **Language**: C#
+
     ![Select language](images/select-language.png)
 
 - **.NET runtime**: .NET 5
+
     ![Select runtime](images/select-runtime.png)
 
 - **Template for first function**: HTTP trigger
+
     ![Select template](images/select-template.png)
 
 - **Function name**: HttpTriggerFunction
+
     ![Select name](images/select-name.png)
 
 - **Namespace**: Workshop.HttpTriggerFunction
+
     ![Select namespace](images/select-namespace.png)
 
 - **Access rights**: Anonymous
+
    ![Select access rights](images/select-accessrights.png)
 
 Your project and first function is now being set up and a number of files will be created in the folder. 
