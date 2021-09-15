@@ -177,8 +177,7 @@ Your individual resources will all be identified by using the GUID displayed in 
 
 The Azure Functions extension in VS Code lets you create a function. 
 
-
-1. From Azure: Functions, select the Create Function icon: 
+From Azure: Functions, select the Create Function icon: 
 
     ![Create function](images/create_func_in_code.png)
 
@@ -213,7 +212,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     Open file add a new setting to the `Values` section
 
     ```json
-    CosmosConnection=[ConnectionString]
+    CosmosConnection=AccountEndpoint=https://abakus-workshop.documents.azure.com:443/;AccountKey=XnSfxZw1Npwzw5oDg1OvIDzBpX8h9KirkDLTsghy7myFCyW3YmOdyVIIyB0bINwmQju0UxIE6aN7C8CKhNK05w==;
     ```
 
 2. Complete the trigger configuration in `CosmosTriggerFunction.cs`
