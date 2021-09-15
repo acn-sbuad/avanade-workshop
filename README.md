@@ -13,7 +13,6 @@ guide you in developing Azure Functions with HTTP trigger, Cosmos DB trigger and
 2. [Azure Functions Core](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cportal%2Cbash%2Ckeda​)
 3. [Visual Studio Code](https://code.visualstudio.com/)
 4. [Azure Functions extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
-5. (unsure) .NET CLI [Included in .NET Core](https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50)
 
 
 We recommend that a folder is created to contain all of the function created in the workshop.
