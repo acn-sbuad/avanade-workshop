@@ -278,7 +278,6 @@ The template function only accesses the first element in the input collection. I
 
     [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/logAllChanges)    
 
-
 2. Print the content of the rating in the console. 
 
     To convert the input object to a rating element by casting it.
@@ -291,13 +290,11 @@ The template function only accesses the first element in the input collection. I
 
     [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printContent)    
     
-
 3. Print a different string to the console depending of the score of the rating. 
 
     _Hint_: Use a switch case.
 
   [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printStringBasedOnScore)    
-
 
 
 ## Task 3 - Creating an Azure Function with a timer trigger
