@@ -101,7 +101,7 @@ Each time the function is triggered, a text string is written to the console and
 
 **Question**
 
-Which text string will appear in the console and which text string will appear in the browser? Not quite sure? Go on to the next step to find ou!
+Which text string will appear in the console and which text string will appear in the browser? Not quite sure? Go on to the next step to find out!
 
 
 ### Run the template project
@@ -274,10 +274,9 @@ The template function only accesses the first element in the input collection. I
 
 1. Ensure that all changes to the ratings results in a log line in the console. 
   
-  _Hint_: Try looping through the input collection with a _ForEach_ loop.
+    _Hint_: Try looping through the input collection with a _ForEach_ loop.
 
-  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/logAllChanges)    
-
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/logAllChanges)    
 
 2. Print the content of the rating in the console. 
 
@@ -289,15 +288,13 @@ The template function only accesses the first element in the input collection. I
 
     _Hint_: Use System.Text.Json.JsonSerializer to serialize the rating object to a json string.
 
-  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printContent)    
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printContent)    
     
-
 3. Print a different string to the console depending of the score of the rating. 
 
     _Hint_: Use a switch case.
 
   [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printStringBasedOnScore)    
-
 
 
 ## Task 3 - Creating an Azure Function with a timer trigger
