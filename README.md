@@ -1,8 +1,10 @@
 # Azure Functions Workshop
 
 
+
 Welcome to this Azure Functions workshop. You will be solving three tasks that will 
 guide you in developing Azure Functions with HTTP trigger, Cosmos DB trigger and a timer trigger.
+
 
 
 ## Prerequisites
@@ -63,7 +65,7 @@ Your project and first function is now being set up and a number of files will b
 
 Your workshop folder should be looking like this
 
-![Generated project files](images/project-files.PNG)
+![Generated project files](images/project-files.png)
 
 A number of files are generated, for the most part we will leave them as is, but there are two files we will be working with. 
 
@@ -119,11 +121,15 @@ Run the cmd `func start` after each step to see the results.
     Change the text in the response from `Welcome to Azure Functions!` 
 to `Hi, [insert name]. Welcome to my first Azure Function.`
 
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/hardcodedResponse)
+
 2. Returing dynamic data
 
     Instead of printing a hard coded string, can you make the function return the current time? 
 
     _Hint_: In C#, the DateTime object is defined in the `System` namespace.
+
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/dynamicResponse)    
 
 3. Accesing query parameters
 
@@ -142,6 +148,7 @@ to `Hi, [insert name]. Welcome to my first Azure Function.`
 
     _Hint_: To send a query parameter to the function add `?{parameterName}={parameterValue}` at the end of the url. E.g. `http://localhost:7071/api/HttpTriggerFunction?company=Avanade`
 
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/accessQueryParam)    
 
 ## Task 2 - Creating an Azure Function with a Cosmos DB trigger
 
@@ -186,7 +193,7 @@ You will now be prompted for configurations for the project. Input the following
 
 - **Storage account prompt**: Use local emulator
 
-    ![Prompt](images/storage-prompt.PNG)
+    ![Prompt](images/storage-prompt.png)
 
 Your function is now being set up and a file `CosmosTriggerFunction.cs` will be added to your folder.
 
@@ -253,12 +260,33 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
 
     Each time a rating is given on the web site, you should see activity in your console.
 
+**Question**
+
+    The template function only accesses the first element in the input collection. In what cases would the collection hold more than one element?
 
 ### Modify Cosmos DB Trigger function
 
-// Print the contents of the rating as a json string to the terminal.
+1. Ensure that all changes to the ratings results in a log line in the console. 
+  
+  _Hint_: Try looping through the input collection with a _ForEach_ loop.
+
+
+2. Print the content of the rating in the console. 
+
+    To convert the input object to a rating element by casting it.
+    
+    ```cs
+    Rating r = (Rating) input[i];
+    ```
+
+    _Hint_: Use System.Text.Json.JsonSerializer to serialize the rating object to a json string.
+
+3. Print a different string to the console depending of the score of the rating. 
+
+    _Hint_: Use a switch case.
 
 
 ## Task 3 - Creating an Azure Function with a timer trigger
 
 ## Task 4 - Publishing the functions to Azure
+
