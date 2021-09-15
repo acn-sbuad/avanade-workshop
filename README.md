@@ -302,6 +302,7 @@ The template function only accesses the first element in the input collection. I
 
 
 ## Task 3 - Creating an Azure Function with a timer trigger
+Another use case for Azure Functions is when you have a job that needs to run on a schedule. Once a week, once a month og even once every five minutes. In this task, you are to create a function that prints a summary of the ratings on the pizza site every 5 minute.
 
 ### Setup trigger
 
