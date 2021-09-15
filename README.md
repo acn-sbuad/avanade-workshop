@@ -302,6 +302,7 @@ The template function only accesses the first element in the input collection. I
 
 
 ## Task 3 - Creating an Azure Function with a timer trigger
+Another use case for Azure Functions is when you have a job that needs to run on a schedule. Once a week, once a month og even once every five minutes. In this task, you are to create a function that prints a summary of the ratings on the pizza site every 5 minute.
 
 ### Setup trigger
 
@@ -358,6 +359,7 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 5 minutes is a long time to wait for your function to trigger. Are you abel to modify the cron job to trigger every 5 second?
 
 ## Task 4 - Deploying the functions to Azure
+Untill now you have been running the functions locally. This step describes how deploy the function to Azure.
 
 ![Deploy functions to Azure](images/deply_functions.png)
 
@@ -376,7 +378,7 @@ In order to trigger a function navigate to the trigger:
 
 ![Select trigger](images/select_trigger.png)
 
-Then click "Test / run"
+Then click "Code + Test"
 
 From the "Code + Test" view you can trigger functions (1) and see live logs(2).
 ![Function trigger & logs](images/trigger_logs_azure.png)
