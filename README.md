@@ -168,10 +168,11 @@ Your task will be to create an Azure Function that is triggered each time a new 
 
 For the purpose of this workshop, each instance of the site stores the ratings in a seperate collection in Cosmos DB. This way, you can test you function by adding a rating to the site, and it only triggering your function.
 
-Your individual resources will all be identified by using the GUID displayed in the top right corner of the website.
+Your individual resources will all be identified by using the GUID displayed in the top right corner of the website. 
 
 ![guid](images/guid.png)    
 
+Keep this GUID handy and insert it everywhere in the description where `[GUID]` is mentioned.
 
 ### Create a new Azure Function
 
@@ -212,7 +213,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     Open file add a new setting to the `Values` section
 
     ```json
-    CosmosConnection: "AccountEndpoint=https://abakus-workshop.documents.azure.com:443/;AccountKey=XnSfxZw1Npwzw5oDg1OvIDzBpX8h9KirkDLTsghy7myFCyW3YmOdyVIIyB0bINwmQju0UxIE6aN7C8CKhNK05w==;"
+    "CosmosConnection": "AccountEndpoint=https://abakus-workshop.documents.azure.com:443/;AccountKey=XnSfxZw1Npwzw5oDg1OvIDzBpX8h9KirkDLTsghy7myFCyW3YmOdyVIIyB0bINwmQju0UxIE6aN7C8CKhNK05w==;"
     ```
 
 2. Complete the trigger configuration in `CosmosTriggerFunction.cs`
@@ -235,7 +236,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     - Change  the value of `LeaseCollectionName` from _leases_ to `"leases_[GUID]"`
 
     The fully configured attribute should look like this
-    
+    "
     ```cs
     [CosmosDBTrigger(
             databaseName: "storage",
