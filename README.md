@@ -358,6 +358,7 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 5 minutes is a long time to wait for your function to trigger. Are you abel to modify the cron job to trigger every 5 second?
 
 ## Task 4 - Deploying the functions to Azure
+Untill now you have been running the functions locally. This step describes how to deploy it to Azure.
 
 ![Deploy functions to Azure](images/deply_functions.png)
 
