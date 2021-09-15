@@ -306,7 +306,7 @@ The template function only accesses the first element in the input collection. I
 
 1. Using the same project as previous steps: navigate to the Azure functions extension and click the "Create new function.." button
 
-![Untitled](Workshop%202%2087db913ff5c948ba8148964f958d9d0f/Untitled.png)
+![Timer trigger creation](images/create_timer_trigger.png)
 
 1. When propted for configurations enter:
 
@@ -358,7 +358,7 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 
 ## Task 4 - Deploying the functions to Azure
 
-![Untitled](Workshop%202%2087db913ff5c948ba8148964f958d9d0f/Untitled%201.png)
+![Deploy functions to Azure](images/deply_functions.png)
 
 When promted to configure your function select:
 
@@ -373,7 +373,7 @@ Once the deployement is done you should be able see your newly created function 
 
 In order to trigger a function navigate to the trigger:
 
-![Untitled](Workshop%202%2087db913ff5c948ba8148964f958d9d0f/Untitled%202.png)
+![Select trigger](images/select_trigger.png)
 
 Then click "Test / run"
 
