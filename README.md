@@ -376,7 +376,7 @@ In order to trigger a function navigate to the trigger:
 
 ![Select trigger](images/select_trigger.png)
 
-Then click "Test / run"
+Then click "Code + Test"
 
 From the "Code + Test" view you can trigger functions (1) and see live logs(2).
 ![Function trigger & logs](images/trigger_logs_azure.png)
