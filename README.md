@@ -212,7 +212,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     Open file add a new setting to the `Values` section
 
     ```json
-    CosmosConnection=AccountEndpoint=https://abakus-workshop.documents.azure.com:443/;AccountKey=XnSfxZw1Npwzw5oDg1OvIDzBpX8h9KirkDLTsghy7myFCyW3YmOdyVIIyB0bINwmQju0UxIE6aN7C8CKhNK05w==;
+    CosmosConnection: "AccountEndpoint=https://abakus-workshop.documents.azure.com:443/;AccountKey=XnSfxZw1Npwzw5oDg1OvIDzBpX8h9KirkDLTsghy7myFCyW3YmOdyVIIyB0bINwmQju0UxIE6aN7C8CKhNK05w==;"
     ```
 
 2. Complete the trigger configuration in `CosmosTriggerFunction.cs`
