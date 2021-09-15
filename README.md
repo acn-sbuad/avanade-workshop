@@ -375,5 +375,4 @@ In order to trigger a function navigate to the trigger:
 Then click "Test / run"
 
 From this view you can trigger functions (1) and see live logs(2).
-
-### Configure appsettings in azure portals
+![Function trigger & logs](images/trigger_logs_azure.png)
