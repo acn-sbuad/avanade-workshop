@@ -26,7 +26,7 @@ e.g. `Avanade Functions Workshop`
 
 Congratulations, you are now ready to start developing your first Azure functions!
 
-## Task 1 - Creating an Azure Function with an HTTP-trigger
+## Task 1 - Creating an Azure Function with an HTTP trigger
 
 ### Create an Azure Functions project
 
@@ -159,7 +159,7 @@ to `Hi, [insert name]. Welcome to my first Azure Function.`
 
 In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and our function will be triggered based on actions on this page. 
 
-The site collects ratings for various pizzas and users can give a score from 0 to 5. The ratings are stored in an Azure Cosmos DB.
+The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB.
 
 ![rating](images/rating.png)    
 
@@ -182,7 +182,7 @@ The Azure Functions extension in VS Code lets you create a function.
 
     ![Create function](images/create_func_in_code.png)
 
-You will now be prompted for configurations for the project. Input the following values:
+You will now be prompted for configurations for the project and login to Azure. Input the following values:
 - **Template for function**: Azure Cosmos DB trigger
 
 - **Function name**: CosmosTriggerFunction
@@ -191,6 +191,10 @@ You will now be prompted for configurations for the project. Input the following
 - **Namespace**: Workshop.HttpTriggerFunction
 
 - **Settings from `local.settings.json`**: + Create new local app setting and Skip for now
+
+- **Select subscription**: Select your available subscription.
+
+- **Select database account**: Skip for now
 
 - **Database name**: storage
 
