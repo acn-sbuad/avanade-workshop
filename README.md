@@ -158,7 +158,7 @@ to `Hi, [insert name]. Welcome to my first Azure Function.`
 
 ## Task 2 - Creating an Azure Function with a Cosmos DB trigger
 
-For task 2 we will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and our function will be triggered based on actions on this page. 
+In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and our function will be triggered based on actions on this page. 
 
 The site collects ratings for various pizzas and users can give a score from 0 to 5. The ratings are stored in an Azure Cosmos DB.
 
@@ -262,19 +262,22 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
 
     and change type for input from `IReadOnlyList<MyDocument>` to `IReadOnlyList<Rating>` 
 
+4. Run the function
     Your function should now be ready to go and you can run it by typing the cmd `func start` in the terminal.
 
     Each time a rating is given on the web site, you should see activity in your console.
 
 **Question**
 
-    The template function only accesses the first element in the input collection. In what cases would the collection hold more than one element?
+The template function only accesses the first element in the input collection. In what cases would the collection hold more than one element?
 
 ### Modify Cosmos DB Trigger function
 
 1. Ensure that all changes to the ratings results in a log line in the console. 
   
   _Hint_: Try looping through the input collection with a _ForEach_ loop.
+
+  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/logAllChanges)    
 
 
 2. Print the content of the rating in the console. 
@@ -287,10 +290,14 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
 
     _Hint_: Use System.Text.Json.JsonSerializer to serialize the rating object to a json string.
 
+  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printContent)    
+    
+
 3. Print a different string to the console depending of the score of the rating. 
 
     _Hint_: Use a switch case.
 
+  [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printStringBasedOnScore)    
 
 ## Task 3 - Creating an Azure Function with a timer trigger
 
