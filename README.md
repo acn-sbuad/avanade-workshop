@@ -13,7 +13,6 @@ guide you in developing Azure Functions with HTTP trigger, Cosmos DB trigger and
 2. [Azure Functions Core](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cportal%2Cbash%2Ckeda​)
 3. [Visual Studio Code](https://code.visualstudio.com/)
 4. [Azure Functions extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
-5. (unsure) .NET CLI [Included in .NET Core](https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50)
 
 
 We recommend that a folder is created to contain all of the function created in the workshop.
@@ -299,7 +298,85 @@ The template function only accesses the first element in the input collection. I
 
   [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/CosmosDbTriggerFunction/ModifyCosmosDbFunction/printStringBasedOnScore)    
 
+
+
 ## Task 3 - Creating an Azure Function with a timer trigger
 
-## Task 4 - Publishing the functions to Azure
+### Setup trigger
 
+1. Using the same project as previous steps: navigate to the Azure functions extension and click the "Create new function.." button
+
+![Untitled](Workshop%202%2087db913ff5c948ba8148964f958d9d0f/Untitled.png)
+
+1. When propted for configurations enter:
+
+    Template for function:  **TimerTrigger**
+
+    Name: **ScheduledJob**
+
+    Namespace: **Workshop.TimerTrigger**
+
+    Cron Expression (every 5 minute): **0 */5 * * * ***
+
+2. If promted to create a storage account when debugging, click "**use local emulator**"
+
+The timer trigger is now genereated in your soultion folder in "ScheduledJob.cs": 
+
+```csharp
+[Function("ScheduledJob")]
+public static void Run([TimerTrigger("0 */5 * * * *")] MyInfo myTimer, FunctionContext context)
+{
+    var logger = context.GetLogger("ScheduledJob");
+    logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+    logger.LogInformation($"Next timer schedule at: {myTimer.ScheduleStatus.Next}");
+}
+```
+
+### Testing TimerTrigger
+
+To test the function, run `func start` from cmd / terminal in the solution folder. The output should 
+
+### Code to get summary from api:
+
+```csharp
+[FunctionName("ScheduledJob")]
+public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, ILogger log)
+{
+    var endpoint = "https://ava-abakus-pizza-rating.azurewebsites.net/ratings/{sessionCode}";
+    var httpClient = new HttpClient();
+    var result = await httpClient.GetStringAsync(endpoint + "?min=5");
+
+    log.LogInformation($"Result: {result}");
+}
+```
+
+(Replace {sessionCode} in the endpoint variable with your session code from [https://pizzaranker.z1.web.core.windows.net/](https://pizzaranker.z1.web.core.windows.net/))
+
+### Modify timer function
+
+5 minutes is a long time to wait for your function to trigger. Are you abel to modify the cron job to 
+
+## Task 4 - Deploying the functions to Azure
+
+![Untitled](Workshop%202%2087db913ff5c948ba8148964f958d9d0f/Untitled%201.png)
+
+When promted to configure your function select:
+
+1. **Create new functin app in Azure..**
+2. Name: **Pick a globally unique name**
+3. Runtime stack: **.NET 5(non-LTS)**
+4. Location: **Norway East**
+
+Once the deployement is done you should be able see your newly created function app in the [azure portal](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp).
+
+### Trigger functions / logs in Azure portals
+
+In order to trigger a function navigate to the trigger:
+
+![Untitled](Workshop%202%2087db913ff5c948ba8148964f958d9d0f/Untitled%202.png)
+
+Then click "Test / run"
+
+From this view you can trigger functions (1) and see live logs(2).
+
+### Configure appsettings in azure portals
