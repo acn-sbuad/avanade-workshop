@@ -5,7 +5,7 @@ public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "g
 {
     var response = req.CreateResponse(HttpStatusCode.OK);
     response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-    response.WriteString($"The current time is: {DateTime.Now.ToString()}");
+    response.WriteString($"The current time is: {System.DateTime.Now.ToString()}");
     return response;
 }
 ```
