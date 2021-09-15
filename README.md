@@ -354,7 +354,7 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 
 ### Modify timer function
 
-5 minutes is a long time to wait for your function to trigger. Are you abel to modify the cron job to 
+5 minutes is a long time to wait for your function to trigger. Are you abel to modify the cron job to trigger every 5 second?
 
 ## Task 4 - Deploying the functions to Azure
 
