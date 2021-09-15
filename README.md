@@ -101,7 +101,7 @@ Each time the function is triggered, a text string is written to the console and
 
 **Question**
 
-Which text string will appear in the console and which text string will appear in the browser? Not quite sure? Go on to the next step to find ou!
+Which text string will appear in the console and which text string will appear in the browser? Not quite sure? Go on to the next step to find out!
 
 
 ### Run the template project
