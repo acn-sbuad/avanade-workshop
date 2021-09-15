@@ -1,7 +1,3 @@
-# Modifying the HTTP trigger function
-
-## Step 1: Hardcoded response
-
 ```cs
 [Function("HttpTriggerFunctionTask")]
 public static HttpResponseData Run(
