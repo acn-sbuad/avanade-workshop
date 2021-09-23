@@ -163,6 +163,8 @@ Other available options are `Function` and `Admin` when would you use these two 
 
 In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and our function will be triggered based on actions on this page. 
 
+![website overview](images/website-overview.png)    
+
 The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB.
 
 ![rating](images/rating.png)    
@@ -228,7 +230,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     ```cs
     [CosmosDBTrigger(
             databaseName: "storage",
-            collectionName: "ratings_[GUID]",
+            collectionName: "ratings_[GUID]", // incert your guid here
             ConnectionStringSetting = "",
             LeaseCollectionName = "leases")]
     ```
@@ -237,7 +239,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
 
     - The value of `ConnectionStringSetting` should be `"CosmosConnection"`. This refers to the value that was included in local.settings.json
 
-    - Change  the value of `LeaseCollectionName` from _leases_ to `"leases_[GUID]"`
+    - Change  the value of `LeaseCollectionName` from _leases_ to `"leases_[GUID]"` Remember to insert your custom guid.
 
     The fully configured attribute should look like this
     "
