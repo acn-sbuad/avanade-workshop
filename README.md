@@ -325,7 +325,7 @@ Another use case for Azure Functions is when you have a job that needs to run on
 
     Namespace: **Workshop.TimerTrigger**
 
-    Cron Expression (every 5 minute): **0 */5 * * * ***
+    Cron Expression (every 5 minute): __0 */5 * * * *__
 
 2. If promted to create a storage account when debugging, click "**use local emulator**"
 
