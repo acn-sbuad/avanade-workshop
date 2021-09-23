@@ -272,6 +272,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     and change type for input from `IReadOnlyList<MyDocument>` to `IReadOnlyList<Rating>` 
 
 4. Run the function
+
     Your function should now be ready to go and you can run it by typing the cmd `func start` in the terminal.
 
     Each time a rating is given on the web site, you should see activity in your console.
