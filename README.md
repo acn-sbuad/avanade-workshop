@@ -155,6 +155,10 @@ to `Hi, [insert name]. Welcome to my first Azure Function.`
 
     [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/accessQueryParam)    
 
+**Question**
+During the configuration of the function we set the access rights to `anonymous`.
+Other available options are `Function` and `Admin` when would you use these two configurations? 
+
 ## Task 2 - Creating an Azure Function with a Cosmos DB trigger
 
 In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and our function will be triggered based on actions on this page. 
