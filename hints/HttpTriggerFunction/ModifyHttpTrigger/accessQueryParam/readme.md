@@ -1,17 +1,12 @@
 ```cs
-[Function("HttpTriggerFunctionTask")]
-public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
-    FunctionContext executionContext)
+[FunctionName("HttpTriggerFunction")]
+public static async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+    ILogger log)
 {
-    var response = req.CreateResponse(HttpStatusCode.OK);
-    response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-    
-    var query = HttpUtility.ParseQueryString(req.Url.Query);
-    string company  = query["company"];
-    
-    string res = !string.IsNullOrEmpty(company) ? $"You provided company: {company}" : "Please include a company in query.";
-    
-    response.WriteString(res);
-    return response;
+    string name = req.Query["name"];
+    string company = req.Query["company"];
+    string responseMessage = $"Hello, {name}. Are you ready for this workshop with {company}?";
+    return new OkObjectResult(responseMessage);
 }
 ```

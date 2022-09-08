@@ -1,13 +1,21 @@
 ```cs
-[Function("HttpTriggerFunctionTask")]
-public static HttpResponseData Run(
-    [HttpTrigger(AuthorizationLevel.Anonymous,"get", "post")] 
-    HttpRequestData req,
-    FunctionContext executionContext)
+[FunctionName("HttpTriggerFunction")]
+public static async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, 
+    ILogger log)
 {
-    var response = req.CreateResponse(HttpStatusCode.OK);
-    response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-    response.WriteString("Hi, Ola Nordmann. Welcome to my first Azure Function.");
-    return response;
+    string name = req.Query["name"];
+    
+    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+    dynamic data = JsonConvert.DeserializeObject(requestBody);
+    
+    name = name ?? data?.name;
+
+    if (!string.IsNullOrEmpty(name))
+    {
+        return new OkObjectResult($"Hello, {name}. This HTTP triggered function executed successfully.");
+    }
+
+    return new OkObjectResult("Welcome to my first Azure Function!");
 }
 ```

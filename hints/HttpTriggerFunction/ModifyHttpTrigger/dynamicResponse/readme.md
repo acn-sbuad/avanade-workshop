@@ -3,9 +3,7 @@
 public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
     FunctionContext executionContext)
 {
-    var response = req.CreateResponse(HttpStatusCode.OK);
-    response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-    response.WriteString($"The current time is: {System.DateTime.Now.ToString()}");
-    return response;
+    string responseString = $"The current date and time is {System.DateTime.Now}";
+    return new OkObjectResult(responseString);
 }
 ```

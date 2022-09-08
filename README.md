@@ -9,11 +9,17 @@ guide you in developing Azure Functions with HTTP trigger, Cosmos DB trigger and
 
 ## Prerequisites
 
-1. An active Azure account. Create a [free account](https://docs.microsoft.com/en-us/learn/modules/create-an-azure-account/2-azu)
+1. An active Azure account. Create a [free account](https://azure.microsoft.com/en-us/free)
 2. [Azure Functions Core v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash#install-the-azure-functions-core-tools)
-3. [Visual Studio Code](https://code.visualstudio.com/)
-4. [Azure Functions extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
-5. [SDK for both .Net 5 and .Net Core 3.1](https://dotnet.microsoft.com/download)
+    - To confirm installation, type `func -v` in a terminal. The output should be a version number in the following format `4.X.X`.
+3. [.Net 6 SDK](https://dotnet.microsoft.com/download)
+    - To confirm installation type `dotnet --version` in a terminal. The output should be a version number in the following format `6.X.X`.
+4. [Visual Studio Code](https://code.visualstudio.com/)
+5. [Azure Functions extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
+    - To confirm installation, look for the following installed installations in the extensions tab in VS Code: Azure Account, Azure Functions, Azure Resources.      
+6. [C# extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 
+    - To confirm installation, look for C# in the extensions-tab in VS Code.
+
 
 We recommend that a folder is created to contain all of the function created in the workshop.
 
@@ -22,30 +28,39 @@ We recommend that a folder is created to contain all of the function created in 
 
 1. Create a folder that will contain all of the functions created in the workshop
 e.g. `learning-functions`
-2. Open Visual Studio code and open the newly created folder by selecting `Open folder` in the `File` menu.
+2. Open Visual Studio Code and open the newly created folder by selecting `Open folder` in the `File` menu.
+
+We will now be connecting VS Code to your Azure Account
+    
+3. In the side menu select the Azure icon and click `Sign in to Azure...` in the `Resources` section. 
+
+![Log onto Azure in VS Code](images/vs-code-log-onto-azure.png)
+
+Follow the instructions to sign in to your account.
 
 Congratulations, you are now ready to start developing your first Azure functions!
 
 ## Task 1 - Creating an Azure Function with an HTTP trigger
 
-### Create an Azure Functions project
+### Set up the Azure Function App
+The Azure Functions extension in VS Code lets you create a function app project, along with your first function.
 
-The Azure Functions extension in VS Code lets you create a function app project, along with your first function. 
+1. In VS Code, under the `Workspace` section of the Azure extension, select `Add` and `Create Function`.
 
-1. From Azure: Functions, select the Create Project icon: 
+    ![Create project](images/add-in-azure-extension.png)
 
-    ![Create project](images/create_project_in_code.png)
 
-You will now be prompted for configurations for the project. Input the following values:
+2. You will now be given the option of creating a function project, select yes. 
 
-- **Folder that will contain your project**: The folder you newly created.
+![Create project prompt](images/create-project-prompt.png)
+
+Going forward you will not be prompted for configurations for the project. Input the following values:
 
 - **Language**: C#
 
     ![Select language](images/select-language.png)
 
-- **.NET runtime**: .NET 5
-
+- **.NET runtime**: .NET 6 (LTS)
     ![Select runtime](images/select-runtime.png)
 
 - **Template for first function**: HTTP trigger
@@ -56,7 +71,7 @@ You will now be prompted for configurations for the project. Input the following
 
     ![Select name](images/select-name.png)
 
-- **Namespace**: Workshop.HttpTriggerFunction
+- **Namespace**: LearningFunctions.HttpTriggerFunction
 
     ![Select namespace](images/select-namespace.png)
 
@@ -66,42 +81,50 @@ You will now be prompted for configurations for the project. Input the following
 
 Your project and first function is now being set up and a number of files will be created in the folder. 
 
+
 ### The project files
 
-Your workshop folder should be looking like this
+Your workshop folder should look like this
 
 ![Generated project files](images/project-files.png)
 
-A number of files are generated, for the most part we will leave them as is, but there are two files we will be working with. 
+A number of files are generated, for the most part they will be left as is, but there are two files you will need to edit. 
 
-- `local.settings.json` holds the settings for running the function locally and we will be updating this later in the workshop. 
+- `local.settings.json` holds the settings for running the function locally and you will be updating this later in the workshop. 
 
 - `HttpTriggerFunction.cs` contains the function.
 
 ```cs
-[Function("HttpTriggerFunction")]
-public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous,"get", "post")] HttpRequestData req,
-    FunctionContext executionContext)
+[FunctionName("HttpTriggerFunction")]
+public static async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+    ILogger log)
 {
-    var logger = executionContext.GetLogger("HttpTriggerFunction");
-    logger.LogInformation("C# HTTP trigger function processed a request.");
-    var response = req.CreateResponse(HttpStatusCode.OK);
-    response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-    response.WriteString("Welcome to Azure Functions!");
-    return response;
+    log.LogInformation("C# HTTP trigger function processed a request.");
+    string name = req.Query["name"];
+    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+    dynamic data = JsonConvert.DeserializeObject(requestBody);
+    name = name ?? data?.name;
+    string responseMessage = string.IsNullOrEmpty(name)
+        ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+        : $"Hello, {name}. This HTTP triggered function executed successfully.";
+    return new OkObjectResult(responseMessage);
 }
 ```
 
 
-The function an attribute `[Function("HttpTriggerFunction")]` that specifies that this is an Azure Function and that it reacts to an `http trigger`. 
+The functions first input parameter has an attribute `[HttpTrigger(...)]` that specifies that the function response to an `http trigger`.
 
-The function supports both `HTTP GET` and `HTTP POST` requests, and the input is an `HttpRequestData` object and a `FuncionContext` object.
+The function supports both `HTTP GET` and `HTTP POST` requests, no authorization is required and no route is defined. 
+The input is an `HttpRequest` object and an `ILogger` object.
 
 Each time the function is triggered, a text string is written to the console and a text string is returned to the client.
 
 **Question**
 
-Which text string will appear in the console and which text string will appear in the browser? Not quite sure? Go on to the next step to find out!
+Which text string will appear in the console and which text string will appear in the browser? 
+
+Not quite sure? Go on to the next step to find out!
 
 
 ### Run the template project
@@ -123,12 +146,26 @@ Run the cmd `func start` after each step to see the results.
 
 1. Hard coded response.
 
-    Change the text in the response from `Welcome to Azure Functions!` 
-to `Hi, [insert name]. Welcome to my first Azure Function.`
+    In the case no name is passed to the function, change the text in the response from 
+    `This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.` 
+    to `Welcome to my first Azure Function!`
 
     [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/hardcodedResponse)
 
-2. Returing dynamic data
+2. Accessing query parameters
+
+    The function template retrieves a single query parameter _name_. 
+    Can you extend the function to process two query parameters `name` and `company`? 
+    
+    Use the parameters to print a response to the user in the following format:
+    
+    `Hello, [name]. Are you ready for this workshop with [company]?`
+
+    _Hint_: To send a query parameter to the function add `?{parameterName}={parameterValue}` at the end of the url. E.g. `http://localhost:7071/api/HttpTriggerFunction?company=Avanade` If you want to send multiple parameters separate them with `&`.
+
+    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/accessQueryParam)    
+
+3. Returning dynamic data
 
     Instead of printing a hard coded string, can you make the function return the current time? 
 
@@ -136,24 +173,6 @@ to `Hi, [insert name]. Welcome to my first Azure Function.`
 
     [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/dynamicResponse)    
 
-3. Accesing query parameters
-
-    To access a query parameter passed to the function use the following code snippets to the file.
-
-    ```cs
-    using System.Web;
-    ```
-
-    ```cs
-    var query = HttpUtility.ParseQueryString(req.Url.Query);
-    string parameterValue = query["parameterName"];
-    ```
-
-    Knowing this, are you able to use the parameter value in the response returned to the user? 
-
-    _Hint_: To send a query parameter to the function add `?{parameterName}={parameterValue}` at the end of the url. E.g. `http://localhost:7071/api/HttpTriggerFunction?company=Avanade`
-
-    [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/accessQueryParam)    
 
 **Question**
 During the configuration of the function we set the access rights to `anonymous`.
@@ -172,7 +191,7 @@ The site collects ratings for various pizzas and users can give a score from 0 t
 
 Your task will be to create an Azure Function that is triggered each time a new rating is given on the site.
 
-For the purpose of this workshop, each instance of the site stores the ratings in a seperate collection in Cosmos DB. This way, you can test you function by adding a rating to the site, and it only triggering your function.
+For the purpose of this workshop, each instance of the site stores the ratings in a separate collection in Cosmos DB. This way, you can test you function by adding a rating to the site, and it only triggering your function.
 
 Your individual resources will all be identified by using the GUID displayed in the top right corner of the website. 
 
@@ -204,7 +223,7 @@ You will now be prompted for configurations for the project and login to Azure. 
 
 - **Database name**: storage
 
-- **Colletion name**: ratings_[GUID] e.g. `ratings_88a3175c-310a-45b4-920d-c0576f617e5d`
+- **Collection name**: ratings_[GUID] e.g. `ratings_88a3175c-310a-45b4-920d-c0576f617e5d`
 
 - **Storage account prompt**: Use local emulator
 
@@ -230,7 +249,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     ```cs
     [CosmosDBTrigger(
             databaseName: "storage",
-            collectionName: "ratings_[GUID]", // incert your guid here
+            collectionName: "ratings_[GUID]", // insert your guid here
             ConnectionStringSetting = "",
             LeaseCollectionName = "leases")]
     ```
@@ -317,7 +336,7 @@ Another use case for Azure Functions is when you have a job that needs to run on
 
 ![Timer trigger creation](images/create_timer_trigger.png)
 
-1. When propted for configurations enter:
+1. When prompted for configurations enter:
 
     Template for function:  **TimerTrigger**
 
@@ -327,9 +346,9 @@ Another use case for Azure Functions is when you have a job that needs to run on
 
     Cron Expression (every 5 minute): __0 */5 * * * *__
 
-2. If promted to create a storage account when debugging, click "**use local emulator**"
+2. If prompted to create a storage account when debugging, click "**use local emulator**"
 
-The timer trigger is now genereated in your soultion folder in "ScheduledJob.cs": 
+The timer trigger is now generated in your solution folder in "ScheduledJob.cs": 
 
 ```csharp
 [Function("ScheduledJob")]
@@ -366,18 +385,18 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 5 minutes is a long time to wait for your function to trigger. Are you abel to modify the cron job to trigger every 5 second?
 
 ## Task 4 - Deploying the functions to Azure
-Untill now you have been running the functions locally. This step describes how deploy the function to Azure.
+Until now you have been running the functions locally. This step describes how deploy the function to Azure.
 
 ![Deploy functions to Azure](images/deply_functions.png)
 
-When promted to configure your function select:
+When prompted to configure your function select:
 
-1. **Create new functin app in Azure..**
+1. **Create new function app in Azure..**
 2. Name: **Pick a globally unique name**
 3. Runtime stack: **.NET 5(non-LTS)**
 4. Location: **Norway East**
 
-Once the deployement is done you should be able see your newly created function app in the [azure portal](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp).
+Once the deployment is done you should be able see your newly created function app in the [azure portal](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp).
 
 ### Trigger functions / logs in Azure portals
 
