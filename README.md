@@ -207,6 +207,8 @@ Keep this GUID handy and insert it everywhere in the description where `[INSERT 
 
 You will now be prompted for configurations for the project and login to Azure. Input the following values:
 
+[TODO: go through steps and confirm what needs to be selected]
+[Note: Could we have a file ready for them where they only need to replace certain parts of the code? ]
 - **Template for function**: Azure Cosmos DB trigger
 
 - **Function name**: CosmosTriggerFunction
