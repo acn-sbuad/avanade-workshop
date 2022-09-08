@@ -10,7 +10,7 @@ guide you in developing Azure Functions with HTTP trigger, Cosmos DB trigger and
 ## Prerequisites
 
 1. An active Azure account. Create a [free account](https://docs.microsoft.com/en-us/learn/modules/create-an-azure-account/2-azu)
-2. [Azure Functions Core](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cportal%2Cbash%2Ckeda​)
+2. [Azure Functions Core v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash#install-the-azure-functions-core-tools)
 3. [Visual Studio Code](https://code.visualstudio.com/)
 4. [Azure Functions extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 5. [SDK for both .Net 5 and .Net Core 3.1](https://dotnet.microsoft.com/download)
