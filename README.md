@@ -21,7 +21,7 @@ We recommend that a folder is created to contain all of the function created in 
 ## Setting up a development environment
 
 1. Create a folder that will contain all of the functions created in the workshop
-e.g. `Avanade Functions Workshop`
+e.g. `learning-functions`
 2. Open Visual Studio code and open the newly created folder by selecting `Open folder` in the `File` menu.
 
 Congratulations, you are now ready to start developing your first Azure functions!
