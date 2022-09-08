@@ -169,7 +169,7 @@ Run the cmd `func start` after each step to see the results.
 
     Instead of printing a hard coded string, can you make the function return the current time? 
 
-    _Hint_: In C#, the DateTime object is defined in the `System` namespace.
+    _Hint_: In C#, the DateTime object is defined in the `System` namespace. To get the current date use `System.DateTime.Now`.
 
     [Code hint](https://github.com/acn-sbuad/avanade-workshop/tree/main/hints/HttpTriggerFunction/ModifyHttpTrigger/dynamicResponse)    
 
@@ -180,7 +180,7 @@ Other available options are `Function` and `Admin` when would you use these two 
 
 ## Task 2 - Creating an Azure Function with a Cosmos DB trigger
 
-In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and our function will be triggered based on actions on this page. 
+In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and your function will be triggered based on actions on this page. 
 
 ![website overview](images/website-overview.png)    
 
@@ -191,29 +191,29 @@ The site collects ratings for various pizzas and users can give a score from 0 t
 
 Your task will be to create an Azure Function that is triggered each time a new rating is given on the site.
 
-For the purpose of this workshop, each instance of the site stores the ratings in a separate collection in Cosmos DB. This way, you can test you function by adding a rating to the site, and it only triggering your function.
+For the purpose of this workshop, each instance of the site stores the ratings in a separate collection in Cosmos DB. This way, you can test you function by adding a rating to the site, and it only triggers your function.
 
-Your individual resources will all be identified by using the GUID displayed in the top right corner of the website. 
+Your individual resources will be identified by using the GUID displayed in the top right corner of the website. 
 
 ![guid](images/guid.png)    
 
-Keep this GUID handy and insert it everywhere in the description where `[GUID]` is mentioned.
+Keep this GUID handy and insert it everywhere in the description where `[INSERT GUID]` is mentioned.
 
 ### Create a new Azure Function
 
-The Azure Functions extension in VS Code lets you create a function. 
+1. In VS Code, under the `Workspace` section of the Azure extension, select `Add` and `Create Function`.
 
-From Azure: Functions, select the Create Function icon: 
-
-    ![Create function](images/create_func_in_code.png)
+![Create project](images/add-in-azure-extension.png)
 
 You will now be prompted for configurations for the project and login to Azure. Input the following values:
+
 - **Template for function**: Azure Cosmos DB trigger
 
 - **Function name**: CosmosTriggerFunction
 
+- **Namespace**: LearningFunctions.CosmosTriggerFunction
 
-- **Namespace**: Workshop.HttpTriggerFunction
+- **Insert info about storage**;
 
 - **Settings from `local.settings.json`**: + Create new local app setting and Skip for now
 
@@ -223,7 +223,7 @@ You will now be prompted for configurations for the project and login to Azure. 
 
 - **Database name**: storage
 
-- **Collection name**: ratings_[GUID] e.g. `ratings_88a3175c-310a-45b4-920d-c0576f617e5d`
+- **Collection name**: ratings_[INSERT GUID] e.g. `ratings_88a3175c-310a-45b4-920d-c0576f617e5d`
 
 - **Storage account prompt**: Use local emulator
 
@@ -249,7 +249,7 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
     ```cs
     [CosmosDBTrigger(
             databaseName: "storage",
-            collectionName: "ratings_[GUID]", // insert your guid here
+            collectionName: "ratings_[INSERT GUID]", // insert your guid here
             ConnectionStringSetting = "",
             LeaseCollectionName = "leases")]
     ```
@@ -342,7 +342,7 @@ Another use case for Azure Functions is when you have a job that needs to run on
 
     Name: **ScheduledJob**
 
-    Namespace: **Workshop.TimerTrigger**
+    Namespace: **LearningFunctions.TimerTrigger**
 
     Cron Expression (every 5 minute): __0 */5 * * * *__
 
