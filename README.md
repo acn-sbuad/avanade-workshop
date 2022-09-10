@@ -180,16 +180,16 @@ Other available options are `Function` and `Admin` when would you use these two 
 
 ## Task 2 - Creating an Azure Function with a Cosmos DB trigger
 
-In this and future tasks, you will be working with a [website for rating pizza](https://pizzaranker.z1.web.core.windows.net/), and your function will be triggered based on actions on this page. 
+In this and future tasks, you will be working with a [website for rating pizza](https://pizzaapp.z1.web.core.windows.net/). The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB. Cosmos DB is a fully managed NoSQL database for modern app development.
 
 ![website overview](images/website-overview.png)    
 
-The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB.
+
 
 ![rating](images/rating.png)    
 
 
-Your task will be to create an Azure Function that is triggered each time a new rating is given on the site.
+Your task will be to create an Azure Function that is triggered each time a new rating is given on the site. This can be done using a Azure function with a Cosmos DB trigger.
 
 For the purpose of this workshop, each instance of the site stores the ratings in a separate collection in Cosmos DB. This way, you can test you function by adding a rating to the site, and it only triggers your function.
 
@@ -372,7 +372,7 @@ To test the function, run `func start` from cmd / terminal in the solution folde
 [FunctionName("ScheduledJob")]
 public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, ILogger log)
 {
-    var endpoint = "https://ava-abakus-pizza-rating.azurewebsites.net/ratings/{sessionCode}";
+    var endpoint = "https://apipizza.azurewebsites.net/ratings/ab2a204f-c5f1-424b-85e2-d8d7ac4730cc";
     var httpClient = new HttpClient();
     var result = await httpClient.GetStringAsync(endpoint + "?min=5");
 
@@ -380,7 +380,7 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 }
 ```
 
-(Replace {sessionCode} in the endpoint variable with your session code from [https://pizzaranker.z1.web.core.windows.net/](https://pizzaranker.z1.web.core.windows.net/))
+(Replace {sessionCode} in the endpoint variable with your session code from [https://pizzaapp.z1.web.core.windows.net/](https://pizzaapp.z1.web.core.windows.net//))
 
 ### Modify timer function
 
@@ -389,16 +389,21 @@ public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, I
 ## Task 4 - Deploying the functions to Azure
 Until now you have been running the functions locally. This step describes how deploy the function to Azure.
 
-![Deploy functions to Azure](images/deply_functions.png)
+![Create Azure function app in Azure](images/create-azure-function.png)
 
 When prompted to configure your function select:
 
 1. **Create new function app in Azure..**
 2. Name: **Pick a globally unique name**
-3. Runtime stack: **.NET 5(non-LTS)**
+3. Runtime stack: **.NET 6**
 4. Location: **Norway East**
 
-Once the deployment is done you should be able see your newly created function app in the [azure portal](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp).
+
+Once the creation process is complete you should be able see your newly created function app in the [azure portal](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp).
+
+**Deploy the code to your newly created function app**
+![Deploy project to azure funciton app](images/deploy.png)
+
 
 ### Trigger functions / logs in Azure portals
 
