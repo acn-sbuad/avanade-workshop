@@ -4,10 +4,15 @@ title: Task 2
 nav_order: 2
 ---
 
+<details open markdown="block">
+  <summary>
+    Creating an Azure Function with a Cosmos DB trigger
+  </summary>
+    In this and future tasks, you will be working with a [website for rating pizza](https://pizzaapp.z1.web.core.windows.net/). The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB. Cosmos DB is a fully managed NoSQL database for modern app development.
 
-{{% expandlarge id="create-func-with-cosmosdb" header="Creating an Azure Function with a Cosmos DB trigger" %}}
-Testing expansion
-{{% /expandlarge %}}
+![website overview](images/website-overview.png)    
+
+</details>
 
 ##  Creating an Azure Function with a Cosmos DB trigger
 
