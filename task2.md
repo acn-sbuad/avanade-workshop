@@ -4,16 +4,6 @@ title: Task 2
 nav_order: 2
 ---
 
-<details open markdown="block">
-  <summary>
-    Creating an Azure Function with a Cosmos DB trigger
-  </summary>
-    In this and future tasks, you will be working with a [website for rating pizza](https://pizzaapp.z1.web.core.windows.net/). The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB. Cosmos DB is a fully managed NoSQL database for modern app development.
-
-![website overview](images/website-overview.png)    
-
-</details>
-
 ##  Creating an Azure Function with a Cosmos DB trigger
 
 In this and future tasks, you will be working with a [website for rating pizza](https://pizzaapp.z1.web.core.windows.net/). The site collects ratings for various pizzas and users can give a score from 0 to 4. The ratings are stored in an Azure Cosmos DB. Cosmos DB is a fully managed NoSQL database for modern app development.
@@ -51,13 +41,7 @@ You will now be prompted for configurations for the project and login to Azure. 
 
 - **Namespace**: LearningFunctions.CosmosTriggerFunction
 
-- **Insert info about storage**;
-
-- **Settings from `local.settings.json`**: + Create new local app setting and Skip for now
-
-- **Select subscription**: Select your available subscription.
-
-- **Select database account**: Skip for now
+- **Storage settings**: AzureWebJobsStorage
 
 - **Database name**: storage
 
@@ -71,13 +55,15 @@ Your function is now being set up and a file `CosmosTriggerFunction.cs` will be 
 
 ### Complete setup of function
 
-1. Set connection string in `local.settings.json`
+1. In `local.settings.json` you will now be adding a new property to the values section. 
 
-    Open file add a new setting to the `Values` section
-
-    ```json
+<details open markdown="block">
+  <summary>
+  New settings property
+  </summary>
     "CosmosConnection": "AccountEndpoint=https://abakus-workshop.documents.azure.com:443/;AccountKey=XnSfxZw1Npwzw5oDg1OvIDzBpX8h9KirkDLTsghy7myFCyW3YmOdyVIIyB0bINwmQju0UxIE6aN7C8CKhNK05w==;"
-    ```
+</details>
+   
 
 2. Complete the trigger configuration in `CosmosTriggerFunction.cs`
 
