@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Azure Functions workshop
-nav_order: 0
+nav_exclude: true
 ---
 
 # Azure Functions Workshop
