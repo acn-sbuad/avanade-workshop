@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 
-## Task 1 - Creating an Azure Function with an HTTP trigger
+## Creating an Azure Function with an HTTP trigger
 
 ### Set up the Azure Function App
 The Azure Functions extension in VS Code lets you create a function app project, along with your first function.
